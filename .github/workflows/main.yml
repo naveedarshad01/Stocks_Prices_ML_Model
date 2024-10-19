@@ -1,0 +1,30 @@
+name: CI Pipeline  # Name of the workflow
+
+on:
+  push:
+    branches:
+      - main  # Runs the workflow on push to the main branch
+  pull_request:
+    branches:
+      - main  # Also runs on pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # The environment where the job runs
+
+    steps:
+    - name: Checkout code  # Step to checkout code from the repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.x  # Set up Python environment
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies  # Install project dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run tests  # Run unit tests
+      run: |
+        pytest
