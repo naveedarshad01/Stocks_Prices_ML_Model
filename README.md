@@ -1,2 +1,3 @@
 # Stocks_Prices_ML_Model
 Stocks_Prices_ML_Model
+model

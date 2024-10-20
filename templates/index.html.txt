@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stock Data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket;
+
+        // Connect to the WebSocket
+        window.onload = function() {
+            socket = io.connect('http://' + document.domain + ':' + location.port);
+
+            // Send request for stock data
+            socket.emit('request_stock_data', 'AAPL');  // Replace 'AAPL' with your desired stock symbol
+
+            // Listen for stock updates from the server
+            socket.on('stock_update', function(data) {
+                console.log(data);
+                displayStockData(data);
+            });
+        };
+
+        // Function to display stock data on the web page
+        function displayStockData(data) {
+            var stockDataDiv = document.getElementById('stock-data');
+            stockDataDiv.innerHTML = JSON.stringify(data, null, 2);
+        }
+    </script>
+</head>
+<body>
+    <h1>Live Stock Data Stream</h1>
+    <pre id="stock-data"></pre>  <!-- Place to display stock data -->
+</body>
+</html>
