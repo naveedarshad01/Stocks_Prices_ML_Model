@@ -103,7 +103,7 @@ app = Dash(__name__, server=server, routes_pathname_prefix='/')
 
 # Define the layout of the dashboard
 app.layout = html.Div(children=[
-    html.H1(children='Live Stock Prediction Dashboard'),
+    html.H1(children='Live Stocks Prediction Dashboard'),
     
     dcc.Input(id='stock-symbol', value='AAPL', type='text'),
     html.Button('Submit', id='submit-button', n_clicks=0),
